@@ -13,7 +13,7 @@ var swapCityOnePath = function(p, i, j) {
 };
 
 // partially mapped crossover
-exports.pmx = function(p1, p2) {
+exports.pmx = exports.partiallyMappedCrossover = exports.partiallyMatchedCrossover = function(p1, p2) {
     var offspring = [];
     offspring[0] = p1.slice(0);
     offspring[1] = p2.slice(0);
@@ -72,7 +72,7 @@ exports.randomCitySwapMutation = function(p) {
 };
 
 // reverse sequence mutation
-exports.rsm = function(p) {
+exports.rsm = exports.randomSequenceMutation = function(p) {
     var c = p.slice(0);
     var twoIndices = pickTwoIndices(p);
 
