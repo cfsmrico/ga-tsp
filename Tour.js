@@ -1,6 +1,6 @@
-function Tour(path) {
+function Tour(path, fitness) {
     this.path = path;
-    this.fitness = 0.0;
+    this.fitness = fitness;
 }
 
 module.exports = Tour;

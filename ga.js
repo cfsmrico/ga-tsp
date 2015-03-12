@@ -12,13 +12,13 @@ var swapCityOnePath = function(p, i, j) {
     p[j] = temp;
 };
 
-// randomly pick and return two indices i, j from path p (i < j)
+// randomly pick and return two indices i, j from path p (i < j) and i != 0
 var pickTwoIndices = function(p) {
-    var i = Math.floor(Math.random() * p.length);
+    var i = Math.floor(1 + Math.random() * (p.length - 1));
     var j = i;
 
     while (i == j) {
-        j = Math.floor(Math.random() * p.length);
+        j = Math.floor(1 + Math.random() * (p.length - 1));
     }
 
     return i < j ? [i, j] : [j, i];
@@ -48,7 +48,7 @@ exports.rsm = exports.randomSequenceMutation = function(p) {
 // partially mapped crossover
 exports.pmx = exports.partiallyMappedCrossover = exports.partiallyMatchedCrossover = function(p1, p2, cut1, cut2) {
     var offspring = [p1.slice(0), p2.slice(0)];
-    var cut1 = cut1 !== undefined ? cut1 : Math.floor(Math.random() * p1.length);   // left side of crossover section
+    var cut1 = cut1 !== undefined ? cut1 : 1 + Math.floor(Math.random() * (p1.length - 1));   // left side of crossover section
     var cut2 = cut2 !== undefined ? cut2 : cut1 + 1 + Math.floor(Math.random() * (p1.length - cut1));   // right side of crossover section
     var mapping1 = [];
     var mapping2 = [];
@@ -61,7 +61,7 @@ exports.pmx = exports.partiallyMappedCrossover = exports.partiallyMatchedCrossov
     }
 
     // repair duplicates in offspring using mapping of swapped cities (before crossover section)
-    for (var i = 0; i < cut1; ++i) {
+    for (var i = 1; i < cut1; ++i) {
         while (mapping1[offspring[0][i]] !== undefined) {
             offspring[0][i] = mapping1[offspring[0][i]];
         }

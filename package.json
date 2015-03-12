@@ -1,0 +1,26 @@
+{
+  "name": "ga-tsp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "minimist": "^1.1.1",
+    "euclidean-distance": "^0.1.0",
+    "jasmine-node": "^1.14.5",
+    "express": "^4.12.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cfsmrico/ga-tsp"
+  },
+  "author": "Chaney Fonseca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cfsmrico/ga-tsp/issues"
+  },
+  "homepage": "https://github.com/cfsmrico/ga-tsp"
+}
