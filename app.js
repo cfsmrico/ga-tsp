@@ -7,12 +7,13 @@ var argv = require('minimist')(process.argv.slice(2));
 // configurable params
 var X_MAX = 500;
 var Y_MAX = 500;
-var nCities = argv.c ? argv.c : 50;
+var nCities = argv.c ? argv.c : 70;
 var populationSize = argv.p ? argv.p : 100;
-var mutationPct = argv.m ? argv.m : 5;
+var mutationPct = argv.m ? argv.m : 10;
 var maxGenerations = argv.g ? argv.g : 1000;
 var mutationOperation = argv.o ? argv.o : 1;    // 0 for random city swap and 1 for RSM
 var tournamentSize = argv.t ? argv.t : 4;
+var outputNthGenSolution = 10;  // output the path and the fitness of the best solution every N generations
 
 // returns randomly-sorted array
 var fisherYatesShuffle = function (array) {
@@ -106,12 +107,14 @@ for (var i = 0; i < nCities; ++i) {
 // init population
 var tours = [];
 for (var i = 0; i < populationSize; ++i) {
-    tours[i] = new Tour(fisherYatesShuffle(cityNames.slice(0), 0.0));
+    tours[i] = new Tour([0].concat(fisherYatesShuffle(cityNames.slice(1))));
     tours[i].fitness = calculateDistance(tours[i]);
 }
 
 var currentGeneration = 1;
 var rankedTours = rankTours(tours);
+
+console.log('Initial solution has fitness ' + rankedTours[0].fitness + ' and path ' + rankedTours[0].path);
 
 while (currentGeneration <= maxGenerations) {
     // create nextGen array and move over fittest two tours unaltered (elitism)
@@ -158,4 +161,11 @@ while (currentGeneration <= maxGenerations) {
 
     // increment generations counter
     ++currentGeneration;
+
+    // output
+    if (currentGeneration % outputNthGenSolution == 0) {
+        console.log('Generation ' + currentGeneration + "'s best solution has fitness " + rankedTours[0].fitness);
+    }
 }
+
+console.log('Final solution has fitness ' + rankedTours[0].fitness + ' and path  ' + rankedTours[0].path);

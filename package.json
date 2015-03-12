@@ -6,8 +6,7 @@
   "dependencies": {
     "minimist": "^1.1.1",
     "euclidean-distance": "^0.1.0",
-    "jasmine-node": "^1.14.5",
-    "express": "^4.12.2"
+    "jasmine-node": "^1.14.5"
   },
   "devDependencies": {},
   "scripts": {
